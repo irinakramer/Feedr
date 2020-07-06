@@ -10,8 +10,8 @@ $(document).ready(function () {
   // API URLs
   const proxyURL = 'https://boiling-inlet-94554.herokuapp.com/';
   const mashableUrl = 'https://api.mashable.com/v1/posts/';
-  const nytUrl = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' + nytApiKey;
-  const newsapiUrl = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=' + newsApiKey;
+  const nytUrl = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' + process.env.nytApiKey;
+  const newsapiUrl = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=' + process.env.newsApiKey;
   const bingUrl = 'https://feedr-bingnews.cognitiveservices.azure.com/bing/v7.0/news';
 
 
