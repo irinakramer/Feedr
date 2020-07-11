@@ -10,11 +10,11 @@ $(document).ready(function () {
   // API URLs
   const proxyURL = 'https://boiling-inlet-94554.herokuapp.com/';
   const mashableUrl = 'https://api.mashable.com/v1/posts/';
-  const nytUrl = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' + nytApiKey;
-  const newsapiUrl = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=' + newsApiKey;
+  const nytUrl = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' + FEEDR_NYT_API;
+  const newsapiUrl = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=' + FEEDR_NEWS_API;
   const bingUrl = 'https://feedr-bingnews.cognitiveservices.azure.com/bing/v7.0/news';
 
-
+  console.log(FEEDR_NYT_API);
   // function handleDefaultResponse(allData) {
   //   $.each(allData, function () {
   //     if (this.title !== '') {
@@ -173,7 +173,7 @@ $(document).ready(function () {
         format: "json"
       },
       headers: {
-        'Ocp-Apim-Subscription-Key': bingApiKey
+        'Ocp-Apim-Subscription-Key': FEEDR_BING_API
       },
       error: function () {
         $('#main').html('<p>Bing: An error has occurred. </p>');
