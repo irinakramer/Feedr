@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html class="no-js" lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Feedr</title>
-    <link
-      rel="stylesheet"
-      href="styles/html5bp.css"
-      media="screen"
-      charset="utf-8"
-    />
-    <link
-      rel="stylesheet"
-      href="styles/style.css"
-      media="screen"
-      charset="utf-8"
-    />
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
 
-  <body>
-    <!--[if lt IE 8]>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Feedr - News agregator app - Irina Kramer</title>
+  <link rel="stylesheet" href="styles/html5bp.css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="styles/style.css" media="screen" charset="utf-8" />
+  <meta name="description"
+    content="Read top news stories and learn about bestseller books from NYT, or switch to a HackerNews clone app. A single page app in JavaScript." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+  <!--[if lt IE 8]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
         <a href="http://browsehappy.com/">upgrade your browser</a> to improve
@@ -29,54 +21,54 @@
       </p>
     <![endif]-->
 
-    <header>
-      <section class="container">
-        <a href="#" id="logo"><h1>Feedr</h1></a>
-        <nav>
-          <ul>
-            <li>
-              <a href="#">News Source: <span id="source">Source Name</span></a>
-              <ul>
-                <li id="bing"><a href="#">Bing News</a></li>
-                <li id="nyt"><a href="#">NYT Books</a></li>
-                <li id="newsapi"><a href="#">News API Org</a></li>
-              </ul>
-            </li>
-          </ul>
-          <section id="search">
-            <input type="text" name="name" value="" />
-            <a href="#" id="search-icon"
-              ><img src="images/search.png" alt=""
-            /></a>
-          </section>
-        </nav>
-        <div class="clearfix"></div>
-      </section>
-    </header>
-    <div id="popUp" class="loader hidden">
-      <a href="#" class="closePopUp">X</a>
-      <div class="container">
-        <h1>Article title here</h1>
-        <p>
-          Article description/content here.
-        </p>
-        <a href="#" class="popUpAction" target="_blank"
-          >Read more from source</a
-        >
-      </div>
-    </div>
-    <section id="main" class="container">
-      <!-- article built here -->
+  <header>
+    <section class="container">
+      <a href="#" id="logo">
+        <h1>Feedr</h1>
+      </a>
+      <nav>
+        <ul>
+          <li>
+            <a href="#">News Source: <span id="source">Source Name</span></a>
+            <ul>
+              <li id="nyttop"><a href="#">NYT Top Stories</a></li>
+              <li id="nytbooks"><a href="#">NYT Books</a></li>
+              <li id="hackernews"><a href="https://irinakramer.github.io/hackernews/index.html"
+                  target="blank">HackerNews</a></li>
+            </ul>
+          </li>
+        </ul>
+        <section id="search">
+          <input type="text" name="name" value="" />
+          <a href="#" id="search-icon"><img src="images/search.png" alt="" /></a>
+        </section>
+      </nav>
+      <div class="clearfix"></div>
     </section>
+  </header>
+  <div id="popUp" class="loader hidden">
+    <a href="#" class="closePopUp">X</a>
+    <div class="container">
+      <h1>Article title here</h1>
+      <p>
+        Article description/content here.
+      </p>
+      <a href="#" class="popUpAction" target="_blank">Read more from source</a>
+    </div>
+  </div>
+  <section id="main" class="container">
+    <!-- article built here -->
+  </section>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>
-      window.jQuery ||
-        document.write(
-          '<script src="js/vendor/jquery-1.11.3.min.js"><\/script>'
-        );
-    </script>
-    <script src="js/app.js"></script>
-    <script src="js/keys.js"></script>
-  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+    window.jQuery ||
+      document.write(
+        '<script src="js/vendor/jquery-1.11.3.min.js"><\/script>'
+      );
+  </script>
+  <script src="js/app.js"></script>
+  <script src="js/keys.js"></script>
+</body>
+
 </html>

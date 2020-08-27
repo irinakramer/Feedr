@@ -6,62 +6,35 @@ $(document).ready(function () {
    */
 
   // API URLs
-  const proxyURL = 'https://boiling-inlet-94554.herokuapp.com/';
-  const mashableUrl = 'https://api.mashable.com/v1/posts/';
-  const nytUrl = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' + FEEDR_NYT_API;
+  const NYT_TOP_URL = 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=' + FEEDR_NYT_API;
+  const NYT_BOOKS_URL = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' + FEEDR_NYT_API;
   const newsapiUrl = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=' + FEEDR_NEWS_API;
-  const bingUrl = 'https://feedr-bingnews.cognitiveservices.azure.com/bing/v7.0/news';
 
-  // function handleDefaultResponse(allData) {
-  //   $.each(allData, function () {
-  //     if (this.title !== '') {
-  //       // Define DOM elements to build an article         
-  //       let $image = $('<img>').attr('src', this.thumbnail_standard);
-  //       let $link = $('<a>').attr('href', this.url);
-  //       let $title = $('<h3>').text(this.title);
-  //       let $topic = $('<h6>').text(this.key_topics);
-  //       let $author = $('<small>').text(this.byline);
-  //       let $description = $('<p>').text(this.abstract).addClass('hidden');
-  //       let NytAllObj = {
-  //         image: $image,
-  //         link: $link,
-  //         title: $title,
-  //         author: $author,
-  //         description: $description
-  //       }
-  //       appendToDom(NytAllObj);
-  //     }
-  //   });
-  //   displayArticle();
-  // }
-
-
-  // Default - Bing News
   function handleDefaultResponse(allData) {
-    $('#main').empty();
     $.each(allData, function () {
-      if (this.name !== '') {
+      if (this.title !== '') {
         // Define DOM elements to build an article         
-        let $image = $('<img>').attr('src', this.image.thumbnail.contentUrl);
+        let $image = $('<img>').attr('src', this.thumbnail_standard);
         let $link = $('<a>').attr('href', this.url);
-        let $title = $('<h3>').text(this.name);
-        let $topic = $('<h6>').text(this.category);
-        let $author = $('<small>').text(this.provider[0].name);
-        let $description = $('<p>').text(this.description).addClass('hidden');
-        let BingObj = {
+        let $title = $('<h3>').text(this.title);
+        let $topic = $('<h6>').text(this.key_topics);
+        let $author = $('<small>').text(this.byline);
+        let $description = $('<p>').text(this.abstract).addClass('hidden');
+        let NYTTopObj = {
           image: $image,
           link: $link,
           title: $title,
           author: $author,
           description: $description
         }
-        appendToDom(BingObj);
+        appendToDom(NYTTopObj);
       }
     });
     displayArticle();
   }
 
-  function handleNYTResponse(allData) {
+
+  function handleNYTBooksResponse(allData) {
     // clear #main from other contents
     $('#main').empty();
     $.each(allData, function () {
@@ -71,41 +44,41 @@ $(document).ready(function () {
         let $title = $('<h3>').text(this.title);
         let $author = $('<h6>').text(this.author);
         let $description = $('<p>').text(this.description).addClass('hidden');
-        let NYTObj = {
+        let NYTBooksObj = {
           image: $image,
           link: $link,
           title: $title,
           author: $author,
           description: $description
         }
-        appendToDom(NYTObj);
+        appendToDom(NYTBooksObj);
       }
     });
     displayArticle();
   }
 
-  function handleNewsAPIResponse(allData) {
-    // clear #main from other contents
-    $('#main').empty();
-    $.each(allData, function () {
-      if (this.title !== '') {
-        let $image = $('<img>').attr('src', this.urlToImage);
-        let $link = $('<a>').attr('href', this.url);
-        let $title = $('<h3>').text(this.title);
-        let $author = $('<h6>').text(this.author);
-        let $description = $('<p>').text(this.description).addClass('hidden');
-        let NewsObj = {
-          image: $image,
-          link: $link,
-          title: $title,
-          author: $author,
-          description: $description
-        }
-        appendToDom(NewsObj);
-      }
-    });
-    displayArticle();
-  }
+  // function handleNewsAPIResponse(allData) {
+  //   // clear #main from other contents
+  //   $('#main').empty();
+  //   $.each(allData, function () {
+  //     if (this.title !== '') {
+  //       let $image = $('<img>').attr('src', this.urlToImage);
+  //       let $link = $('<a>').attr('href', this.url);
+  //       let $title = $('<h3>').text(this.title);
+  //       let $author = $('<h6>').text(this.author);
+  //       let $description = $('<p>').text(this.description).addClass('hidden');
+  //       let NewsObj = {
+  //         image: $image,
+  //         link: $link,
+  //         title: $title,
+  //         author: $author,
+  //         description: $description
+  //       }
+  //       appendToDom(NewsObj);
+  //     }
+  //   });
+  //   displayArticle();
+  // }
 
   function appendToDom(data) {
     $('#main').append(
@@ -139,24 +112,26 @@ $(document).ready(function () {
     });
   }
 
-  // Default feed - Bing News 
+  // Default feed - NYT Top Stories
   function getDefault() {
     $.ajax({
-      url: bingUrl,
+      url: NYT_TOP_URL,
       data: {
         format: "json"
       },
-      headers: {
-        'Ocp-Apim-Subscription-Key': FEEDR_BING_API
-      },
       error: function () {
-        $('#main').html('<p>Bing: An error has occurred. </p>');
+        $('#main').html('<p>NYT Wire: An error has occurred. </p>');
       },
       success: function (response) {
-        handleDefaultResponse(response.value);
-        //console.log(response);
+        handleDefaultResponse(response.results);
       }
     });
+  }
+
+  function emptyMain() {
+    if ($('#main').children().length > 0) {
+      $('#main').empty();
+    }
   }
 
   /**
@@ -175,20 +150,22 @@ $(document).ready(function () {
   getDefault();
 
   // Load default feed on dropdown click 
-  $('#bing').on('click', function () {
+  $('#nyttop').on('click', function () {
+    emptyMain(); // purge #main from previously loaded contents
     getDefault();
     $('#source').text($(this).text());
   });
   $('#logo').on('click', function () {
+    emptyMain();
     getDefault();
   })
 
 
   // NYT Books
-  $('#nyt').on('click', function () {
+  $('#nytbooks').on('click', function () {
     $('#source').text($(this).text());
     $.ajax({
-      url: nytUrl,
+      url: NYT_BOOKS_URL,
       data: {
         format: 'json'
       },
@@ -196,27 +173,7 @@ $(document).ready(function () {
         $('#main').html('<p>An error has occurred</p>');
       },
       success: function (response) {
-        handleNYTResponse(response.results.books);
-      },
-      type: 'GET'
-    });
-  });
-
-  // News API Org
-  $('#newsapi').on('click', function () {
-    $('#source').text($(this).text());
-    $.ajax({
-      url: newsapiUrl,
-      data: {
-        format: 'json'
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        $('#main').html('<p>News API Org An error has occurred</p>');
-        console.log(jqXHR);
-      },
-      success: function (response) {
-        handleNewsAPIResponse(response.articles);
-        console.log(response);
+        handleNYTBooksResponse(response.results.books);
       },
       type: 'GET'
     });
